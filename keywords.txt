@@ -1,0 +1,52 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+#######################################
+# # Datatypes (KEYWORD1)
+#######################################
+FLProgTimeToStringConverter	KEYWORD1
+FLProgUnixTime	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+blinktime	KEYWORD2
+getDate	KEYWORD2
+getDay	KEYWORD2
+getGmt	KEYWORD2
+getHour	KEYWORD2
+getMinute	KEYWORD2
+getMonth	KEYWORD2
+getSecond	KEYWORD2
+getTimeString	KEYWORD2
+getUnix	KEYWORD2
+getYear	KEYWORD2
+incrementUnixTime	KEYWORD2
+setDate	KEYWORD2
+setDay	KEYWORD2
+setHour	KEYWORD2
+setMinute	KEYWORD2
+setSecond	KEYWORD2
+setTime	KEYWORD2
+setUnix	KEYWORD2
+setYear	KEYWORD2
+settGmt	KEYWORD2
+settMonth	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+FLPROG_RTC_AM_PM_SYMBOL_TYPE	LITERAL1
+FLPROG_RTC_DAY_MONTH_SYMBOL_TYPE	LITERAL1
+FLPROG_RTC_FLASH_AM_PM_SYMBOL	LITERAL1
+FLPROG_RTC_FLASH_DATE_SYMBOL	LITERAL1
+FLPROG_RTC_FLASH_DAY_SYMBOL	LITERAL1
+FLPROG_RTC_FLASH_HOUR_SYMBOL	LITERAL1
+FLPROG_RTC_FLASH_MINUTE_SYMBOL	LITERAL1
+FLPROG_RTC_FLASH_MONTH_SYMBOL	LITERAL1
+FLPROG_RTC_FLASH_SECOND_SYMBOL	LITERAL1
+FLPROG_RTC_FLASH_YEAR_SYMBOL	LITERAL1
+FLPROG_RTC_FOUR_SYMBOL_TYPE	LITERAL1
+FLPROG_RTC_NO_FLASH_SYMBOL	LITERAL1
+FLPROG_RTC_ONE_SYMBOL_TYPE	LITERAL1
+FLPROG_RTC_TWO_SYMBOL_TYPE	LITERAL1
