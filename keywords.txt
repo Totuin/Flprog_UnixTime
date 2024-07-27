@@ -24,13 +24,13 @@ getYear	KEYWORD2
 incrementUnixTime	KEYWORD2
 setDate	KEYWORD2
 setDay	KEYWORD2
+setGmt	KEYWORD2
 setHour	KEYWORD2
 setMinute	KEYWORD2
 setSecond	KEYWORD2
 setTime	KEYWORD2
 setUnix	KEYWORD2
 setYear	KEYWORD2
-settGmt	KEYWORD2
 settMonth	KEYWORD2
 
 #######################################

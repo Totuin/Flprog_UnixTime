@@ -123,7 +123,12 @@ void FLProgUnixTime::setUnix(uint32_t unixTime)
 
 void FLProgUnixTime::setTime(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t date, uint8_t month, uint16_t year)
 {
-    if ((_second == seconds) && (_minute == minutes) && (_hour == hours) && (_date == date) && (_month == month) && (_year = year))
+    uint16_t tempYear = year;
+    if (tempYear < 100)
+    {
+        tempYear = tempYear + 2000;
+    }
+    if ((_second == seconds) && (_minute == minutes) && (_hour == hours) && (_date == date) && (_month == month) && (_year = tempYear))
     {
         return;
     }
@@ -132,7 +137,7 @@ void FLProgUnixTime::setTime(uint8_t seconds, uint8_t minutes, uint8_t hours, ui
     _hour = hours;
     _date = date;
     _month = month;
-    _year = year;
+    _year = tempYear;
     fillUnixTimeFromDataTime();
     fillWeekDay();
 }
@@ -207,11 +212,16 @@ void FLProgUnixTime::settMonth(uint8_t month)
 
 void FLProgUnixTime::setYear(uint16_t year)
 {
-    if (_year == year)
+    uint16_t tempYear = year;
+    if (tempYear < 100)
+    {
+        tempYear = tempYear + 2000;
+    }
+    if (_year == tempYear)
     {
         return;
     }
-    _year = year;
+    _year = tempYear;
     fillUnixTimeFromDataTime();
     fillWeekDay();
 }

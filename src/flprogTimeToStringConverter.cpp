@@ -3,16 +3,36 @@
 FLProgTimeToStringConverter::FLProgTimeToStringConverter(String string, FLProgUnixTime *time)
 {
     _time = time;
-    _charString = (char *)malloc(string.length() + 1);
-    string.toCharArray(_charString, string.length());
-    _charString[string.length()] = 0;
+    _inString = string;
+    init();
+}
+
+void FLProgTimeToStringConverter::setFormatString(String inString)
+{
+    if (inString.equals(_inString))
+    {
+        return;
+    }
+    _inString = inString;
+    init();
+    convertTime();
+}
+
+void FLProgTimeToStringConverter::init()
+{
+    _charStringSize = _inString.length() + 1;
+    free(_charString);
+    _charString = (char *)malloc(_charStringSize);
+    _inString.toCharArray(_charString, _charStringSize);
+    _charString[_charStringSize] = 0;
     setMemoryForString();
 }
 
 void FLProgTimeToStringConverter::setMemoryForString()
 {
-    uint8_t charIndex, stringSize;
-    stringSize = strlen(_charString) + 1;
+    uint8_t charIndex;
+    free(_charReturn);
+    _charReturnSize = _charStringSize + 1;
     for (charIndex = 0; charIndex < strlen(_charString); charIndex++)
     {
         for (uint8_t k = 0; k < strlen(_charInput); k++)
@@ -21,20 +41,20 @@ void FLProgTimeToStringConverter::setMemoryForString()
             {
                 if (k > 0)
                 {
-                    stringSize++;
+                    _charReturnSize++;
                 }
                 if (k > 9)
                 {
-                    stringSize++;
+                    _charReturnSize++;
                 }
                 if (k > 11)
                 {
-                    stringSize++;
+                    _charReturnSize++;
                 }
             }
         }
     }
-    _charReturn = (char *)malloc(stringSize);
+    _charReturn = (char *)malloc(_charReturnSize);
 }
 
 String FLProgTimeToStringConverter::getTimeString()
@@ -49,7 +69,7 @@ String FLProgTimeToStringConverter::getTimeString()
 void FLProgTimeToStringConverter::convertTime()
 {
     uint8_t newStringIndex = 0;
-    for (uint8_t charIndex = 0; charIndex < strlen(_charString); charIndex++)
+    for (uint8_t charIndex = 0; charIndex < _charStringSize; charIndex++)
     {
         newStringIndex = checkChar(_charString[charIndex], newStringIndex);
     }
@@ -101,12 +121,12 @@ uint8_t FLProgTimeToStringConverter::checkChar(char val, uint8_t index)
     }
     if (val == _charInput[8] /*	s	*/)
     {
-        funcFillChar(_time->getSecond(), FLPROG_RTC_TWO_SYMBOL_TYPE, index, FLPROG_RTC_FLASH_SECOND_SYMBOL);
+        funcFillChar((_time->getSecond()), FLPROG_RTC_TWO_SYMBOL_TYPE, index, FLPROG_RTC_FLASH_SECOND_SYMBOL);
         return index + 2;
     }
     if (val == _charInput[9] /*	y	*/)
     {
-        funcFillChar((_time->getYear()), FLPROG_RTC_TWO_SYMBOL_TYPE, index, FLPROG_RTC_FLASH_YEAR_SYMBOL);
+        funcFillChar((_time->getYear()- 2000), FLPROG_RTC_TWO_SYMBOL_TYPE, index, FLPROG_RTC_FLASH_YEAR_SYMBOL);
         return index + 2;
     }
     if (val == _charInput[10] /*	M	*/)
@@ -121,7 +141,7 @@ uint8_t FLProgTimeToStringConverter::checkChar(char val, uint8_t index)
     }
     if (val == _charInput[12] /*	Y	*/)
     {
-        funcFillChar((_time->getYear()), FLPROG_RTC_FOUR_SYMBOL_TYPE, index, FLPROG_RTC_FLASH_YEAR_SYMBOL);
+        funcFillChar((_time->getYear() - 2000), FLPROG_RTC_FOUR_SYMBOL_TYPE, index, FLPROG_RTC_FLASH_YEAR_SYMBOL);
         return index + 4;
     }
     _charReturn[index] = val;
@@ -179,6 +199,7 @@ void FLProgTimeToStringConverter::funcFillChar(uint8_t value, uint8_t type, uint
         _charReturn[position + 1] = blink ? 32 : 0 + 48;
         _charReturn[position + 2] = blink ? 32 : value / 10 + 48;
         _charReturn[position + 3] = blink ? 32 : value % 10 + 48;
+
         break;
     }
 }

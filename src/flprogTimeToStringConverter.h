@@ -19,18 +19,21 @@
 #define FLPROG_RTC_FLASH_DAY_SYMBOL 7
 #define FLPROG_RTC_FLASH_AM_PM_SYMBOL 8
 
-const char *_charInput = "waAdhHimsyMDY"; //	Определяем константу-строку с символами требующими замены			(данные символы заменяются функцией gettime на значение времени)
-const char *_charMidday = "ampmAMPM";     //	Определяем константу-строку для вывода полудня						(am / pm / AM / PM)
-const char *_charDayMon = "SunMonTueWedThuFriSatJanFebMarAprMayJunJulAugSepOctNovDec";
+// const char *_charInput = "waAdhHimsyMDY"; //	Определяем константу-строку с символами требующими замены			(данные символы заменяются функцией gettime на значение времени)
+// const char *_charMidday = "ampmAMPM";     //	Определяем константу-строку для вывода полудня						(am / pm / AM / PM)
+// const char *_charDayMon = "SunMonTueWedThuFriSatJanFebMarAprMayJunJulAugSepOctNovDec";
 
 class FLProgTimeToStringConverter
 {
 public:
     FLProgTimeToStringConverter(String string, FLProgUnixTime *time);
     String getTimeString();
+    String getFormatString() { return _inString; };
+    void setFormatString(String inString);
     void blinktime(uint8_t blinkRazrad, float blinkPeriod = 1);
 
 private:
+    void init();
     void convertTime();
     void setMemoryForString();
     uint8_t checkChar(char val, uint8_t index);
@@ -38,7 +41,14 @@ private:
     FLProgUnixTime *_time = 0;
     char *_charReturn = 0;
     char *_charString = 0;
+    String _inString = "";
     uint32_t _unixCash = 0;
     uint32_t _valFrequency = 1000;
-    uint8_t _valBlink = 0;
+    uint8_t _valBlink = 255;
+    uint8_t _charStringSize = 0;
+    uint8_t _charReturnSize = 0;
+
+    static constexpr char *_charInput = (char *)"waAdhHimsyMDY"; //	Определяем константу-строку с символами требующими замены
+    static constexpr char *_charMidday = (char *)"ampmAMPM";     //	Определяем константу-строку для вывода полудня (am / pm / AM / PM)
+    static constexpr char *_charDayMon = (char *)"SunMonTueWedThuFriSatJanFebMarAprMayJunJulAugSepOctNovDec";
 };
