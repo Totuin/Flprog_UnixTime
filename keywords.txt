@@ -13,6 +13,7 @@ FLProgUnixTime	KEYWORD1
 blinktime	KEYWORD2
 getDate	KEYWORD2
 getDay	KEYWORD2
+getFormatString	KEYWORD2
 getGmt	KEYWORD2
 getHour	KEYWORD2
 getMinute	KEYWORD2
@@ -24,6 +25,7 @@ getYear	KEYWORD2
 incrementUnixTime	KEYWORD2
 setDate	KEYWORD2
 setDay	KEYWORD2
+setFormatString	KEYWORD2
 setGmt	KEYWORD2
 setHour	KEYWORD2
 setMinute	KEYWORD2
