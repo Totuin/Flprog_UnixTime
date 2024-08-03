@@ -19,10 +19,6 @@
 #define FLPROG_RTC_FLASH_DAY_SYMBOL 7
 #define FLPROG_RTC_FLASH_AM_PM_SYMBOL 8
 
-// const char *_charInput = "waAdhHimsyMDY"; //	Определяем константу-строку с символами требующими замены			(данные символы заменяются функцией gettime на значение времени)
-// const char *_charMidday = "ampmAMPM";     //	Определяем константу-строку для вывода полудня						(am / pm / AM / PM)
-// const char *_charDayMon = "SunMonTueWedThuFriSatJanFebMarAprMayJunJulAugSepOctNovDec";
-
 class FLProgTimeToStringConverter
 {
 public:
